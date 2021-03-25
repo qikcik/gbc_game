@@ -70,10 +70,10 @@ Area                       Addr        Size        Decimal Bytes (Attributes)
      00000003  l__HEADER |    00000005  l__HEADER |    00000006  l__HEADER
      00000007  l__HEADER |    00000008  l__HEADER |    00000018  l__BSS   
      0000002C  l__HEADER |    00000033  l__HEADER |    0000006A  l__HOME  
-     0000007E  l__HEADER |    000000E4  l__BASE   |    00000132  l__CODE  
-     00000200  s__CODE   |    0000030D  l__DATA   |    00000332  s__HOME  
-     0000039C  s__BASE   |    00000480  s__CODE_0 |    00000480  s__GSINIT
-     00000480  s__LIT    |    00000F2D  l__GSINIT |    000013AD  s__GSFINA
+     0000007E  l__HEADER |    0000010B  l__BASE   |    000001EF  l__CODE  
+     00000200  s__CODE   |    0000030D  l__DATA   |    000003EF  s__HOME  
+     00000459  s__BASE   |    00000564  s__CODE_0 |    00000564  s__GSINIT
+     00000564  s__LIT    |    00000F2D  l__GSINIT |    00001491  s__GSFINA
      0000C000  _shadow_O |    0000C0A0  s__DATA   |    0000C3AD  s__BSS   
      0000C3C5  s__HEAP   |    0000E000  .STACK    |    0000FF80  .refresh_
 ASxxxx Linker V03.00 + NoICE + sdld,  page 3.
@@ -81,11 +81,14 @@ Hexadecimal  [32-Bits]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
 --------------------       ----        ----        ------- ----- ------------
-_CODE                  00000200    00000132 =         306. bytes (REL,CON)
+_CODE                  00000200    000001EF =         495. bytes (REL,CON)
 
         Value  Global            Value  Global            Value  Global    
         -----  ------            -----  ------            -----  ------    
-     00000200  _init     |    00000246  _main    
+     00000200  _init     |    0000026C  _backgrou |    0000028C  _spritepa
+     000002A4  _main     |    00000390  _set_spri |    00000395  _set_bkg_
+     00000398  .set_pale |    000003B4  _cpu_slow |    000003CF  _cpu_fast
+     000003D6  _cgb_comp
 ASxxxx Linker V03.00 + NoICE + sdld,  page 4.
 Hexadecimal  [32-Bits]
 
@@ -251,44 +254,45 @@ Hexadecimal  [32-Bits]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
 --------------------       ----        ----        ------- ----- ------------
-_HOME                  00000332    0000006A =         106. bytes (REL,CON)
+_HOME                  000003EF    0000006A =         106. bytes (REL,CON)
 
         Value  Global            Value  Global            Value  Global    
         -----  ------            -----  ------            -----  ------    
-     00000332  .remove_V |    00000335  .remove_i |    00000352  .add_VBL 
-     00000355  .add_int  |    00000360  .wait_vbl |    00000360  _wait_vbl
-     0000036F  .display_ |    0000036F  _display_ |    00000386  _remove_V
-     00000391  _add_VBL 
+     000003EF  .remove_V |    000003F2  .remove_i |    0000040F  .add_VBL 
+     00000412  .add_int  |    0000041D  .wait_vbl |    0000041D  _wait_vbl
+     0000042C  .display_ |    0000042C  _display_ |    00000443  _remove_V
+     0000044E  _add_VBL 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 22.
 Hexadecimal  [32-Bits]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
 --------------------       ----        ----        ------- ----- ------------
-_BASE                  0000039C    000000E4 =         228. bytes (REL,CON)
+_BASE                  00000459    0000010B =         267. bytes (REL,CON)
 
         Value  Global            Value  Global            Value  Global    
         -----  ------            -----  ------            -----  ------    
-     0000039C  _set_bkg_ |    0000039C  _set_win_ |    000003A4  _set_spri
-     000003D4  .padup    |    000003D4  _waitpadu |    000003E4  .jpad    
-     000003E4  _joypad   |    0000040C  _waitpad  |    0000040F  .wait_pad
-     00000416  _set_bkg_ |    0000042A  .set_xy_w |    00000433  .set_xy_b
-     00000442  .set_xy_t
+     00000459  _set_spri |    0000045E  _set_bkg_ |    00000461  .set_pale
+     00000480  _set_bkg_ |    00000480  _set_win_ |    00000488  _set_spri
+     000004B8  .padup    |    000004B8  _waitpadu |    000004C8  .jpad    
+     000004C8  _joypad   |    000004F0  _waitpad  |    000004F3  .wait_pad
+     000004FA  _set_bkg_ |    0000050E  .set_xy_w |    00000517  .set_xy_b
+     00000526  .set_xy_t
 ASxxxx Linker V03.00 + NoICE + sdld,  page 23.
 Hexadecimal  [32-Bits]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
 --------------------       ----        ----        ------- ----- ------------
-_GSINIT                00000480    00000F2D =        3885. bytes (REL,CON)
+_GSINIT                00000564    00000F2D =        3885. bytes (REL,CON)
 
         Value  Global            Value  Global            Value  Global    
         -----  ------            -----  ------            -----  ------    
-     00000480  gsinit   
+     00000564  gsinit   
 ASxxxx Linker V03.00 + NoICE + sdld,  page 24.
 Hexadecimal  [32-Bits]
 
 Area                       Addr        Size        Decimal Bytes (Attributes)
 --------------------       ----        ----        ------- ----- ------------
-_GSFINAL               000013AD    00000001 =           1. bytes (REL,CON)
+_GSFINAL               00001491    00000001 =           1. bytes (REL,CON)
 
         Value  Global            Value  Global            Value  Global    
         -----  ------            -----  ------            -----  ------    
@@ -890,12 +894,14 @@ Files Linked                              [ module(s) ]
 
 D:\projekty\gbc_game\!toolchain\gbdk_win\lib/small/asxxxx/gb/crt0.o
                                           [ Runtime ]
-C:\Users\qikcik\AppData\Local\Temp/lcc199600.o
+C:\Users\qikcik\AppData\Local\Temp/lcc169040.o
                                           [ main ]
 
 
 Libraries Linked                          [ object file ]
 
+D:\projekty\gbc_game\!toolchain\gbdk_win\lib/small/asxxxx/gb/gb.lib
+                                          [ cgb.o ]
 D:\projekty\gbc_game\!toolchain\gbdk_win\lib/small/asxxxx/gb/gb.lib
                                           [ set_data.o ]
 D:\projekty\gbc_game\!toolchain\gbdk_win\lib/small/asxxxx/gb/gb.lib
