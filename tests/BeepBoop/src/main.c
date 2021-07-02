@@ -176,6 +176,5 @@ void main()
 		update();
 		draw();
 		wait_vbl_done();
-		wait_vbl_done();
 	}
 }
