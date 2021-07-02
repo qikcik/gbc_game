@@ -1,5 +1,7 @@
 #include <gb/gb.h>
 #include <gb/cgb.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 #include "../data/spriteTiles.h"
 #include "../data/spriteTiles.c"

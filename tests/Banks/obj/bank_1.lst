@@ -1,0 +1,212 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 4.0.7 #12016 (MINGW64)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module bank_1
+                                      6 	.optsdcc -mgbz80
+                                      7 	
+                                      8 ;--------------------------------------------------------
+                                      9 ; Public variables in this module
+                                     10 ;--------------------------------------------------------
+                                     11 	.globl _wait_vbl_done
+                                     12 	.globl _joypad
+                                     13 	.globl _frameIndex
+                                     14 	.globl _player
+                                     15 	.globl b_bank1_gameloop
+                                     16 	.globl _bank1_gameloop
+                                     17 ;--------------------------------------------------------
+                                     18 ; special function registers
+                                     19 ;--------------------------------------------------------
+                                     20 ;--------------------------------------------------------
+                                     21 ; ram data
+                                     22 ;--------------------------------------------------------
+                                     23 	.area _DATA_1
+      000000                         24 _player::
+      000000                         25 	.ds 4
+      000004                         26 _frameIndex::
+      000004                         27 	.ds 1
+                                     28 ;--------------------------------------------------------
+                                     29 ; absolute external ram data
+                                     30 ;--------------------------------------------------------
+                                     31 	.area _DABS (ABS)
+                                     32 ;--------------------------------------------------------
+                                     33 ; global & static initialisations
+                                     34 ;--------------------------------------------------------
+                                     35 	.area _HOME
+                                     36 	.area _GSINIT
+                                     37 	.area _GSFINAL
+                                     38 	.area _GSINIT
+                                     39 ;./src/bank_1.c:84: UINT8 frameIndex = 0;
+      000000 21r04r00                40 	ld	hl, #_frameIndex
+      000003 36 00                   41 	ld	(hl), #0x00
+                                     42 ;--------------------------------------------------------
+                                     43 ; Home
+                                     44 ;--------------------------------------------------------
+                                     45 	.area _HOME
+                                     46 	.area _HOME
+                                     47 ;--------------------------------------------------------
+                                     48 ; code
+                                     49 ;--------------------------------------------------------
+                                     50 	.area _CODE
+                                     51 ;./src/bank_1.c:85: void bank1_gameloop() BANKED
+                                     52 ;	---------------------------------
+                                     53 ; Function bank1_gameloop
+                                     54 ; ---------------------------------
+                           000000    55 	b_bank1_gameloop	= 0
+      000000                         56 _bank1_gameloop::
+      000000 E8 FE                   57 	add	sp, #-2
+                                     58 ;D:/projekty/gbc_game/!toolchain/gbdk_win/include/gb/gb.h:1004: shadow_OAM[nb].tile=tile;
+      000002 21r02r00                59 	ld	hl, #(_shadow_OAM + 0x0002)
+      000005 36 00                   60 	ld	(hl), #0x00
+      000007 21r06r00                61 	ld	hl, #(_shadow_OAM + 0x0006)
+      00000A 36 02                   62 	ld	(hl), #0x02
+                                     63 ;D:/projekty/gbc_game/!toolchain/gbdk_win/include/gb/gb.h:1050: shadow_OAM[nb].prop=prop;
+      00000C 21r03r00                64 	ld	hl, #(_shadow_OAM + 0x0003)
+      00000F 36 00                   65 	ld	(hl), #0x00
+      000011 21r07r00                66 	ld	hl, #(_shadow_OAM + 0x0007)
+      000014 36 00                   67 	ld	(hl), #0x00
+                                     68 ;./src/bank_1.c:37: player.position.x = 8;
+      000016 21r02r00                69 	ld	hl, #(_player + 0x0002)
+      000019 36 08                   70 	ld	(hl), #0x08
+                                     71 ;./src/bank_1.c:38: player.position.y = 0;
+      00001B 21r03r00                72 	ld	hl, #(_player + 0x0003)
+      00001E 36 00                   73 	ld	(hl), #0x00
+                                     74 ;./src/bank_1.c:40: player.processedAction = 0;
+      000020 21r00r00                75 	ld	hl, #_player
+      000023 36 00                   76 	ld	(hl), #0x00
+                                     77 ;./src/bank_1.c:41: player.actionTransition = 0;
+      000025 21r01r00                78 	ld	hl, #(_player + 0x0001)
+      000028 36 00                   79 	ld	(hl), #0x00
+                                     80 ;./src/bank_1.c:89: while(TRUE)
+      00002A                         81 00102$:
+                                     82 ;./src/bank_1.c:91: frameIndex++;
+      00002A 21r04r00                83 	ld	hl, #_frameIndex
+      00002D 34                      84 	inc	(hl)
+                                     85 ;./src/bank_1.c:47: if(!player.processedAction)
+      00002E FAr00r00                86 	ld	a, (#_player + 0)
+      000031 B7                      87 	or	a, a
+      000032 20 0F                   88 	jr	NZ, 00113$
+                                     89 ;./src/bank_1.c:49: player.processedAction = joypad();
+      000034 CDr00r00                90 	call	_joypad
+      000037 7B                      91 	ld	a, e
+      000038 EAr00r00                92 	ld	(#_player),a
+                                     93 ;./src/bank_1.c:50: if(player.processedAction)
+      00003B B7                      94 	or	a, a
+      00003C 28 05                   95 	jr	Z, 00113$
+                                     96 ;./src/bank_1.c:52: player.actionTransition = PLAYER_TRANSITION_MAX;
+      00003E 21r01r00                97 	ld	hl, #(_player + 0x0001)
+      000041 36 08                   98 	ld	(hl), #0x08
+      000043                         99 00113$:
+                                    100 ;./src/bank_1.c:55: if(player.actionTransition != 0)
+      000043 FAr01r00               101 	ld	a, (#(_player + 0x0001) + 0)
+      000046 B7                     102 	or	a, a
+      000047 28 6A                  103 	jr	Z, 00130$
+                                    104 ;./src/bank_1.c:57: switch(player.processedAction)
+      000049 FAr00r00               105 	ld	a, (#_player + 0)
+      00004C FE 01                  106 	cp	a, #0x01
+      00004E 28 3E                  107 	jr	Z, 00122$
+      000050 FE 02                  108 	cp	a, #0x02
+      000052 28 1C                  109 	jr	Z, 00116$
+      000054 FE 04                  110 	cp	a, #0x04
+      000056 28 0E                  111 	jr	Z, 00115$
+      000058 D6 08                  112 	sub	a, #0x08
+      00005A 20 4E                  113 	jr	NZ, 00128$
+                                    114 ;./src/bank_1.c:60: player.position.y += PLAYER_SINGLE_MOVE / PLAYER_TRANSITION_MAX ;
+      00005C FAr03r00               115 	ld	a, (#(_player + 0x0003) + 0)
+      00005F C6 02                  116 	add	a, #0x02
+      000061 EAr03r00               117 	ld	(#(_player + 0x0003)),a
+                                    118 ;./src/bank_1.c:61: break;
+      000064 18 44                  119 	jr	00128$
+                                    120 ;./src/bank_1.c:62: case J_UP:
+      000066                        121 00115$:
+                                    122 ;./src/bank_1.c:63: player.position.y -= PLAYER_SINGLE_MOVE / PLAYER_TRANSITION_MAX ;
+      000066 FAr03r00               123 	ld	a, (#(_player + 0x0003) + 0)
+      000069 3D                     124 	dec	a
+      00006A 3D                     125 	dec	a
+      00006B EAr03r00               126 	ld	(#(_player + 0x0003)),a
+                                    127 ;./src/bank_1.c:64: break;
+      00006E 18 3A                  128 	jr	00128$
+                                    129 ;./src/bank_1.c:65: case J_LEFT:
+      000070                        130 00116$:
+                                    131 ;./src/bank_1.c:66: player.position.x -= PLAYER_SINGLE_MOVE / PLAYER_TRANSITION_MAX ;
+      000070 FAr02r00               132 	ld	a, (#(_player + 0x0002) + 0)
+      000073 3D                     133 	dec	a
+      000074 3D                     134 	dec	a
+      000075 EAr02r00               135 	ld	(#(_player + 0x0002)),a
+                                    136 ;D:/projekty/gbc_game/!toolchain/gbdk_win/include/gb/gb.h:1004: shadow_OAM[nb].tile=tile;
+      000078 21r02r00               137 	ld	hl, #(_shadow_OAM + 0x0002)
+      00007B 36 00                  138 	ld	(hl), #0x00
+      00007D 21r06r00               139 	ld	hl, #(_shadow_OAM + 0x0006)
+      000080 36 02                  140 	ld	(hl), #0x02
+                                    141 ;D:/projekty/gbc_game/!toolchain/gbdk_win/include/gb/gb.h:1050: shadow_OAM[nb].prop=prop;
+      000082 21r03r00               142 	ld	hl, #(_shadow_OAM + 0x0003)
+      000085 36 00                  143 	ld	(hl), #0x00
+      000087 21r07r00               144 	ld	hl, #(_shadow_OAM + 0x0007)
+      00008A 36 00                  145 	ld	(hl), #0x00
+                                    146 ;./src/bank_1.c:68: break;
+      00008C 18 1C                  147 	jr	00128$
+                                    148 ;./src/bank_1.c:69: case J_RIGHT: 
+      00008E                        149 00122$:
+                                    150 ;./src/bank_1.c:70: player.position.x += PLAYER_SINGLE_MOVE / PLAYER_TRANSITION_MAX ;
+      00008E FAr02r00               151 	ld	a, (#(_player + 0x0002) + 0)
+      000091 C6 02                  152 	add	a, #0x02
+      000093 EAr02r00               153 	ld	(#(_player + 0x0002)),a
+                                    154 ;D:/projekty/gbc_game/!toolchain/gbdk_win/include/gb/gb.h:1004: shadow_OAM[nb].tile=tile;
+      000096 21r02r00               155 	ld	hl, #(_shadow_OAM + 0x0002)
+      000099 36 02                  156 	ld	(hl), #0x02
+      00009B 21r06r00               157 	ld	hl, #(_shadow_OAM + 0x0006)
+      00009E 36 00                  158 	ld	(hl), #0x00
+                                    159 ;D:/projekty/gbc_game/!toolchain/gbdk_win/include/gb/gb.h:1050: shadow_OAM[nb].prop=prop;
+      0000A0 21r03r00               160 	ld	hl, #(_shadow_OAM + 0x0003)
+      0000A3 36 20                  161 	ld	(hl), #0x20
+      0000A5 21r07r00               162 	ld	hl, #(_shadow_OAM + 0x0007)
+      0000A8 36 20                  163 	ld	(hl), #0x20
+                                    164 ;./src/bank_1.c:73: }
+      0000AA                        165 00128$:
+                                    166 ;./src/bank_1.c:74: player.actionTransition--;
+      0000AA FAr01r00               167 	ld	a, (#(_player + 0x0001) + 0)
+      0000AD 3D                     168 	dec	a
+      0000AE EAr01r00               169 	ld	(#(_player + 0x0001)),a
+      0000B1 18 05                  170 	jr	00131$
+      0000B3                        171 00130$:
+                                    172 ;./src/bank_1.c:76: else player.processedAction = FALSE;
+      0000B3 21r00r00               173 	ld	hl, #_player
+      0000B6 36 00                  174 	ld	(hl), #0x00
+      0000B8                        175 00131$:
+                                    176 ;./src/bank_1.c:79: move_sprite(0,player.position.x,player.position.y);
+      0000B8 21r03r00               177 	ld	hl, #(_player + 0x0003)
+      0000BB 4E                     178 	ld	c, (hl)
+      0000BC 21r02r00               179 	ld	hl, #(_player + 0x0002)
+      0000BF 46                     180 	ld	b, (hl)
+                                    181 ;D:/projekty/gbc_game/!toolchain/gbdk_win/include/gb/gb.h:1077: OAM_item_t * itm = &shadow_OAM[nb];
+      0000C0 21r00r00               182 	ld	hl, #_shadow_OAM
+                                    183 ;D:/projekty/gbc_game/!toolchain/gbdk_win/include/gb/gb.h:1078: itm->y=y, itm->x=x;
+      0000C3 79                     184 	ld	a, c
+      0000C4 22                     185 	ld	(hl+), a
+      0000C5 70                     186 	ld	(hl), b
+                                    187 ;./src/bank_1.c:80: move_sprite(1,player.position.x+8,player.position.y);
+      0000C6 FAr03r00               188 	ld	a, (#(_player + 0x0003) + 0)
+      0000C9 F8 00                  189 	ldhl	sp,	#0
+      0000CB 77                     190 	ld	(hl), a
+      0000CC FAr02r00               191 	ld	a, (#(_player + 0x0002) + 0)
+      0000CF C6 08                  192 	add	a, #0x08
+      0000D1 F8 01                  193 	ldhl	sp,	#1
+      0000D3 77                     194 	ld	(hl), a
+                                    195 ;D:/projekty/gbc_game/!toolchain/gbdk_win/include/gb/gb.h:1077: OAM_item_t * itm = &shadow_OAM[nb];
+                                    196 ;D:/projekty/gbc_game/!toolchain/gbdk_win/include/gb/gb.h:1078: itm->y=y, itm->x=x;
+      0000D4 11r04r00               197 	ld	de, #(_shadow_OAM + 0x0004)
+      0000D7 2B                     198 	dec	hl
+      0000D8 7E                     199 	ld	a, (hl)
+      0000D9 12                     200 	ld	(de), a
+      0000DA 11r05r00               201 	ld	de, #(_shadow_OAM + 0x0005)
+      0000DD 23                     202 	inc	hl
+      0000DE 7E                     203 	ld	a, (hl)
+      0000DF 12                     204 	ld	(de), a
+                                    205 ;./src/bank_1.c:95: wait_vbl_done();
+      0000E0 CDr00r00               206 	call	_wait_vbl_done
+      0000E3 C3r2Ar00               207 	jp	00102$
+                                    208 ;./src/bank_1.c:97: }
+      0000E6 E8 02                  209 	add	sp, #2
+      0000E8 C9                     210 	ret
+                                    211 	.area _CODE
+                                    212 	.area _CABS (ABS)

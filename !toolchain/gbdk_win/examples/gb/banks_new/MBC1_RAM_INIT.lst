@@ -1,0 +1,25 @@
+                                      1 	.area _GSINIT
+                                      2 
+                                      3 	;ENABLE_RAM_MBC1
+      000000 3E 0A                    4 	ld      A, #0x0a
+      000002 EA 00 00                 5 	ld	(#0x0000), A
+                                      6 	
+                                      7 	;SET_RAM_MBC1_MODE(1);
+      000005 3E 01                    8 	ld      A, #0x01
+      000007 EA 00 60                 9         ld      (#0x6000), A
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (GameBoy Z80-like CPU), page 1.
+Hexadecimal [24-Bits]
+
+Symbol Table
+
+    .__.$$$.=  002710 L   |     .__.ABS.=  000000 G   |     .__.CPU.=  000000 L
+    .__.H$L.=  000000 L
+
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (GameBoy Z80-like CPU), page 2.
+Hexadecimal [24-Bits]
+
+Area Table
+
+   0 _CODE      size      0   flags    0
+   1 _GSINIT    size      A   flags    0
+

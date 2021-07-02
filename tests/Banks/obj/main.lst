@@ -1,0 +1,136 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 4.0.7 #12016 (MINGW64)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module main
+                                      6 	.optsdcc -mgbz80
+                                      7 	
+                                      8 ;--------------------------------------------------------
+                                      9 ; Public variables in this module
+                                     10 ;--------------------------------------------------------
+                                     11 	.globl _main
+                                     12 	.globl b_bank1_gameloop
+                                     13 	.globl _bank1_gameloop
+                                     14 	.globl b_bank0_loadData
+                                     15 	.globl _bank0_loadData
+                                     16 	.globl _set_sprite_palette
+                                     17 	.globl _set_bkg_palette
+                                     18 	.globl _spritepalette
+                                     19 	.globl _backgroundpalette
+                                     20 ;--------------------------------------------------------
+                                     21 ; special function registers
+                                     22 ;--------------------------------------------------------
+                                     23 ;--------------------------------------------------------
+                                     24 ; ram data
+                                     25 ;--------------------------------------------------------
+                                     26 	.area _DATA
+                                     27 ;--------------------------------------------------------
+                                     28 ; absolute external ram data
+                                     29 ;--------------------------------------------------------
+                                     30 	.area _DABS (ABS)
+                                     31 ;--------------------------------------------------------
+                                     32 ; global & static initialisations
+                                     33 ;--------------------------------------------------------
+                                     34 	.area _HOME
+                                     35 	.area _GSINIT
+                                     36 	.area _GSFINAL
+                                     37 	.area _GSINIT
+                                     38 ;--------------------------------------------------------
+                                     39 ; Home
+                                     40 ;--------------------------------------------------------
+                                     41 	.area _HOME
+                                     42 	.area _HOME
+                                     43 ;--------------------------------------------------------
+                                     44 ; code
+                                     45 ;--------------------------------------------------------
+                                     46 	.area _CODE
+                                     47 ;./src/main.c:42: void main()
+                                     48 ;	---------------------------------
+                                     49 ; Function main
+                                     50 ; ---------------------------------
+      000000                         51 _main::
+                                     52 ;./src/./utils/bank.h:5: ENABLE_RAM_MBC1;
+      000000 21 00 00                53 	ld	hl, #0x0000
+      000003 36 0A                   54 	ld	(hl), #0x0a
+                                     55 ;./src/./utils/bank.h:6: SWITCH_4_32_MODE_MBC1;
+      000005 26 60                   56 	ld	h, #0x60
+      000007 36 01                   57 	ld	(hl), #0x01
+                                     58 ;./src/main.c:46: set_bkg_palette(0,1,&backgroundpalette[0]);
+      000009 21r51r00                59 	ld	hl, #_backgroundpalette
+      00000C E5                      60 	push	hl
+      00000D 3E 01                   61 	ld	a, #0x01
+      00000F F5                      62 	push	af
+      000010 33                      63 	inc	sp
+      000011 AF                      64 	xor	a, a
+      000012 F5                      65 	push	af
+      000013 33                      66 	inc	sp
+      000014 CDr00r00                67 	call	_set_bkg_palette
+      000017 E8 04                   68 	add	sp, #4
+                                     69 ;./src/main.c:47: set_sprite_palette(0,3,&spritepalette[0]);
+      000019 21r71r00                70 	ld	hl, #_spritepalette
+      00001C E5                      71 	push	hl
+      00001D 3E 03                   72 	ld	a, #0x03
+      00001F F5                      73 	push	af
+      000020 33                      74 	inc	sp
+      000021 AF                      75 	xor	a, a
+      000022 F5                      76 	push	af
+      000023 33                      77 	inc	sp
+      000024 CDr00r00                78 	call	_set_sprite_palette
+      000027 E8 04                   79 	add	sp, #4
+                                     80 ;./src/main.c:49: SPRITES_8x16;
+      000029 F0r00                   81 	ldh	a, (_LCDC_REG+0)
+      00002B F6 04                   82 	or	a, #0x04
+      00002D E0r00                   83 	ldh	(_LCDC_REG+0),a
+                                     84 ;./src/main.c:51: bank0_loadData();
+      00002F 1Er00                   85 	ld	e, #b_bank0_loadData
+      000031 21r00r00                86 	ld	hl, #_bank0_loadData
+      000034 CDr00r00                87 	call	___sdcc_bcall_ehl
+                                     88 ;./src/main.c:54: SHOW_BKG;
+      000037 F0r00                   89 	ldh	a, (_LCDC_REG+0)
+      000039 F6 01                   90 	or	a, #0x01
+      00003B E0r00                   91 	ldh	(_LCDC_REG+0),a
+                                     92 ;./src/main.c:55: SHOW_SPRITES;
+      00003D F0r00                   93 	ldh	a, (_LCDC_REG+0)
+      00003F F6 02                   94 	or	a, #0x02
+      000041 E0r00                   95 	ldh	(_LCDC_REG+0),a
+                                     96 ;./src/main.c:56: DISPLAY_ON;
+      000043 F0r00                   97 	ldh	a, (_LCDC_REG+0)
+      000045 F6 80                   98 	or	a, #0x80
+      000047 E0r00                   99 	ldh	(_LCDC_REG+0),a
+                                    100 ;./src/main.c:58: bank1_gameloop();
+      000049 1Er00                  101 	ld	e, #b_bank1_gameloop
+      00004B 21r00r00               102 	ld	hl, #_bank1_gameloop
+                                    103 ;./src/main.c:59: }
+      00004E C3r00r00               104 	jp  ___sdcc_bcall_ehl
+      000051                        105 _backgroundpalette:
+      000051 BC 17                  106 	.dw #0x17bc
+      000053 E7 22                  107 	.dw #0x22e7
+      000055 C4 19                  108 	.dw #0x19c4
+      000057 E0 14                  109 	.dw #0x14e0
+      000059 BC 17                  110 	.dw #0x17bc
+      00005B E7 22                  111 	.dw #0x22e7
+      00005D C4 19                  112 	.dw #0x19c4
+      00005F E0 14                  113 	.dw #0x14e0
+      000061 BC 17                  114 	.dw #0x17bc
+      000063 E7 22                  115 	.dw #0x22e7
+      000065 C4 19                  116 	.dw #0x19c4
+      000067 E0 14                  117 	.dw #0x14e0
+      000069 BC 17                  118 	.dw #0x17bc
+      00006B E7 22                  119 	.dw #0x22e7
+      00006D C4 19                  120 	.dw #0x19c4
+      00006F E0 14                  121 	.dw #0x14e0
+      000071                        122 _spritepalette:
+      000071 BC 17                  123 	.dw #0x17bc
+      000073 14 01                  124 	.dw #0x0114
+      000075 40 6A                  125 	.dw #0x6a40
+      000077 63 0C                  126 	.dw #0x0c63
+      000079 BC 17                  127 	.dw #0x17bc
+      00007B E7 22                  128 	.dw #0x22e7
+      00007D C4 19                  129 	.dw #0x19c4
+      00007F E0 14                  130 	.dw #0x14e0
+      000081 BC 17                  131 	.dw #0x17bc
+      000083 E7 22                  132 	.dw #0x22e7
+      000085 C4 19                  133 	.dw #0x19c4
+      000087 E0 14                  134 	.dw #0x14e0
+                                    135 	.area _CODE
+                                    136 	.area _CABS (ABS)

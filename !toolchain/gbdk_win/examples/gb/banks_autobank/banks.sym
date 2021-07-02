@@ -1,0 +1,57 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (GameBoy Z80-like CPU), page 1.
+Hexadecimal [24-Bits]
+
+Symbol Table
+
+    .__.$$$.                                                    =  002710 L
+    .__.ABS.                                                    =  000000 G
+    .__.CPU.                                                    =  000000 L
+    .__.H$L.                                                    =  000000 L
+    ___bank_srcfile1                                               ****** GX
+    ___bank_srcfile2                                               ****** GX
+    ___bank_srcfile3                                               ****** GX
+    ___bank_srcfile4                                               ****** GX
+    ___sdcc_bcall_ehl                                              ****** GX
+  3 ___str_0                                                       00000B R
+  0 ___str_12                                                      000144 R
+  0 ___str_2                                                       0000C3 R
+  0 ___str_4                                                       0000D5 R
+  0 ___str_5                                                       0000D6 R
+  0 ___str_6                                                       0000EC R
+  0 ___str_7                                                       000102 R
+  0 ___str_8                                                       000118 R
+  0 ___str_9                                                       00012E R
+    __current_bank                                                 ****** GX
+  3 _bank_fixed                                                    000000 GR
+    _func_1                                                        ****** GX
+    _func_2                                                        ****** GX
+    _func_3                                                        ****** GX
+  0 _main                                                          000000 GR
+    _printf                                                        ****** GX
+    _puts                                                          ****** GX
+    _some_4                                                        ****** GX
+  3 _some_const_var_0                                              00000A GR
+    _some_const_var_1                                              ****** GX
+    _some_const_var_2                                              ****** GX
+    _some_const_var_3                                              ****** GX
+    _some_const_var_4                                              ****** GX
+    _wait_vbl_done                                                 ****** GX
+    b_func_1                                                       ****** GX
+    b_func_2                                                       ****** GX
+    b_func_3                                                       ****** GX
+    b_some_4                                                       ****** GX
+
+
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (GameBoy Z80-like CPU), page 2.
+Hexadecimal [24-Bits]
+
+Area Table
+
+   0 _CODE                                      size    150   flags    0
+   1 _DATA                                      size      0   flags    0
+   2 _DABS                                      size      0   flags    8
+   3 _HOME                                      size     1C   flags    0
+   4 _GSINIT                                    size      0   flags    0
+   5 _GSFINAL                                   size      0   flags    0
+   6 _CABS                                      size      0   flags    8
+

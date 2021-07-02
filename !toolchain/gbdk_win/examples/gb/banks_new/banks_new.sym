@@ -1,0 +1,53 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (GameBoy Z80-like CPU), page 1.
+Hexadecimal [24-Bits]
+
+Symbol Table
+
+    .__.$$$.                                                    =  002710 L
+    .__.ABS.                                                    =  000000 G
+    .__.CPU.                                                    =  000000 L
+    .__.H$L.                                                    =  000000 L
+    ___current_ram_bank                                         =  0000FC 
+    ___current_rom_bank                                         =  0000FD 
+    ___dummy_variable                                           =  0000FE 
+  0 ___str_2                                                       00028D R
+  0 ___str_4                                                       00029A R
+  0 ___str_5                                                       00029D R
+    __current_bank                                                 ****** GX
+  1 _addendum0                                                     000014 GR
+  3 _addendum1_ram                                                 000014 GR
+  2 _addendum2_ram                                                 000014 GR
+  2 _addendum3_ram                                                 000016 GR
+  2 _addendum_ptr                                                  000018 GR
+  1 _data                                                          000000 GR
+  7 _hello0                                                        00000E GR
+  5 _hello1                                                        000000 GR
+  3 _hello1_ram                                                    000000 GR
+  4 _hello2                                                        000000 GR
+  2 _hello2_ram                                                    000000 GR
+  0 _main                                                          000000 GR
+    _printf                                                        ****** GX
+    _putchar                                                       ****** GX
+    _puts                                                          ****** GX
+  7 _set_RAM_bank1                                                 00002D GR
+  7 _set_RAM_bank2                                                 000037 GR
+  7 _set_ROM_bank1                                                 000000 GR
+  7 _set_ROM_bank2                                                 00001F GR
+
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (GameBoy Z80-like CPU), page 2.
+Hexadecimal [24-Bits]
+
+Area Table
+
+   0 _CODE                                      size    2AA   flags    0
+   1 _DATA                                      size     16   flags    0
+   2 _DATA_2                                    size     1C   flags    0
+   3 _DATA_1                                    size     16   flags    0
+   4 _CODE_2                                    size     13   flags    0
+   5 _CODE_1                                    size     13   flags    0
+   6 _DABS                                      size      0   flags    8
+   7 _HOME                                      size     41   flags    0
+   8 _GSINIT                                    size     A0   flags    0
+   9 _GSFINAL                                   size      0   flags    0
+   A _CABS                                      size      0   flags    8
+
