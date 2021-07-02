@@ -1,2 +1,6 @@
 /\!tool/**
 /\!toolchain/**
+*.gb
+*.map
+*.noi
+*.bat
